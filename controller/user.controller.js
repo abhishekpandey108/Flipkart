@@ -28,7 +28,7 @@ console.log("line 6 in user controller")
         }
     } catch (error) {
         return res.status(500).send({
-            message : error
+            message : "Signup Error 500"
         })
     }
         
