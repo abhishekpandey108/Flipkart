@@ -21,7 +21,7 @@ const userName = process.env.DB_USERNAME
 const password = process.env.DB_PASSWORD
 connection(userName,password);
 
-const port = process.env.port || 8080 ;   
+const port = process.env.port || 8000 ;   
 app.listen(port,()=>{
     console.log(`Server listening on port localhost:${port}`);
 });

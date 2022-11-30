@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router } from 'express';
 import {getProducts , getProductById} from '../controller/product.controller.js';
 import {userLogin,userSignup} from '../controller/user.controller.js';
 

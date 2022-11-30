@@ -1,5 +1,5 @@
 import Product from '../model/product.schema.js';
-
+import axios from 'axios'
 export const getProducts= async(req,res) => {
     try {
         const products = await Product.find();
@@ -20,3 +20,4 @@ export const getProductById= async(req,res) => {
         res.status(500).json({message: error.message});
     }
 }    
+
