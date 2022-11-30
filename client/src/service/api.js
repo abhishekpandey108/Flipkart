@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'https://magnificent-newt-housecoat.cyclic.app';
+const URL = 'https://magnificent-newt-housecoat.cyclic.app/flipkart';
 
 export const authenticateSignup = async(data) => {
 
