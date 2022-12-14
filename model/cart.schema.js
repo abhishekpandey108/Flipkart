@@ -2,12 +2,12 @@ import mongoose from 'mongoose';
 
 const cartSchema = new mongoose.Schema({
     user_Id:{type : String, required: true},
-    products : [
-        {
-          product_id : {type : String, required: true},
-          quantity : {type : Number, default: 1}
-        }
-    ]
+    product_id : {type : String, required: true},
+    url : {type : String, required: true},
+    title : {type : String, required: true},
+    cost : {type : Number, required: true},
+    mrp : {type : Number, required: true},
+    quantity : {type : Number, default: 1}    
 },
 {
     versionKey: false,
@@ -17,4 +17,4 @@ const cartSchema = new mongoose.Schema({
 
 const Cart = mongoose.model('Cart', cartSchema);
 
-export default Cart
+export default Cart;

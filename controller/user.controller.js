@@ -15,15 +15,16 @@ console.log("line 6 in user controller")
                 error : 'user is already registered'
             })
         }else{
-            password = bcrypt.hashSync(password);
-            console.log(password)
-            user.password = password
+            // password = bcrypt.hashSync(password);
+            // console.log(password)
+            // user.password = password
             const newUser = new User(user);
+
             await newUser.save();
 
             return res.status(201).send({
                 message : 'successfully registered',
-               user : user
+                user : user
             })
         }
     } catch (error) {
@@ -36,7 +37,7 @@ console.log("line 6 in user controller")
 
 
 
-const JWT_SECRET = '1234'
+//const JWT_SECRET = '1234'
 
 
 
@@ -49,15 +50,25 @@ export const userLogin = async(req,res) => {
         let user = await User.findOne({ firstname: name});
         let hash = user.password;
         var bool = await bcrypt.compare(pass, hash)
-        console.log(bool);
-
+        
         if(user && bool){ 
-            let token = jwt.sign({
-                _id : user._id,
-                number : user.number
-            }, JWT_SECRET)
+            // let token = jwt.sign({
+            //     _id : user._id,
+            //     number : user.number
+            // }, JWT_SECRET)
                             
-            console.log(token)
+            
+            const token = await user.generateToken();
+            console.log("token: ",token);
+            res.cookie("jwt", 'token',{
+                expires : new Date(Date.now() + 25892000),
+                httpOnly : true
+            })
+            res.cookie("jwt", token,{
+                expires : new Date(Date.now() + 25892000),
+                httpOnly : true
+            }); 
+            
             return res.status(200).json({ data : user,token : token });
         }
         else{
