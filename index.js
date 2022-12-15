@@ -13,9 +13,19 @@ app.use(bodyParser.json({extended:true}));
 app.use(bodyParser.urlencoded({extended:true}));
 
 
-app.use('/flipkart',Router); 
-
+app.use('/',Router); 
 dotenv.config();
+
+app.use(express.static(path.join(__dirname, "./client/build")));
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "./client/build/index.html"),
+    function (err) {
+      res.status(500).send(err);
+    }
+  );
+});
+
 
 const userName = process.env.DB_USERNAME
 const password = process.env.DB_PASSWORD
