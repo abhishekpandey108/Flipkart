@@ -1,7 +1,7 @@
 import axios from "axios";
 import { GET_PRODUCTS_FAILED, GET_PRODUCTS , GET_PRODUCT_DETAILS_REQUEST , GET_PRODUCT_DETAILS_SUCCESS , GET_PRODUCT_DETAILS_FAIL  } from "../actionType/productActionType";
 
-const URL = "https://magnificent-newt-housecoat.cyclic.app/flipkart";
+const URL = "http://localhost:8080";
 
 
 

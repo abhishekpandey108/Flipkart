@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 //const URL = 'https://magnificent-newt-housecoat.cyclic.app';
-//const URL = 'http://localhost:8000/flipkart';
+const URL = 'http://localhost:8080';
 export const authenticateSignup = async(data) => {
 
     try {
-        return await axios.post(`/signup`, data);
+        return await axios.post(`${URL}/signup`, data);
     } catch (error) {
         console.log("Error while Signup",error);
     }
