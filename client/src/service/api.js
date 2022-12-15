@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-//const URL = 'https://magnificent-newt-housecoat.cyclic.app';
-const URL = 'http://localhost:8080';
+
+const URL = 'https://magnificent-newt-housecoat.cyclic.app';
 export const authenticateSignup = async(data) => {
 
     try {
