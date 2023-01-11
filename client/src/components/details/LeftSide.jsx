@@ -53,12 +53,25 @@ const LeftSide = ({product}) => {
   //   navigate('/cart');
   // }
  
+
   const addTooCart = (id) =>{
+    let userId = JSON.parse(localStorage.getItem('User_Id'));
+
+    console.log(userId);
+
     let data ={};
-    data.id = id;
+    data.user_id = userId;
+    data.product_id = id;
     data.url = product.url;
-    data.price = product.cost.price;
-    addCart(product);
+    data.title = product.title.longTitle;
+    data.cost = product.price.cost;
+    data.mrp = product.price.mrp;
+    data.discount = product.price.discount;
+    data.quantity = product.quantity;
+    
+
+
+    addCart(data);
     navigate('/cart');
   }
 

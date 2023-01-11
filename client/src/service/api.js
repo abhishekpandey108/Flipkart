@@ -30,7 +30,7 @@ export const authenticateLogin = async(data) => {
 export const addCart = async(data) => {
 
     try {
-       let id =  data.id;
+       let id =  data.product_id;
        return await axios.post(`${URL}/addToCart/${id}`, data)
     } catch (error) {
         console.log("Error while adding to cart",error);
