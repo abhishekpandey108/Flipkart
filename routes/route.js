@@ -14,7 +14,7 @@ router.get('/products', getProducts);
 
 router.get('/product/:id', getProductById);
 
-router.post('/addToCart', addToCart);
+router.post('/addToCart/:id', addToCart);
 
 
 

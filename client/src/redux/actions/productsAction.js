@@ -3,9 +3,6 @@ import { GET_PRODUCTS_FAILED, GET_PRODUCTS , GET_PRODUCT_DETAILS_REQUEST , GET_P
 
 const URL = "https://magnificent-newt-housecoat.cyclic.app";
 
-
-
-
 export const getProducts = () => async(dispatch) => {
 
     try {

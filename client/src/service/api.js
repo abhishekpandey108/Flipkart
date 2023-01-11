@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 
-const URL = 'https://magnificent-newt-housecoat.cyclic.app';
+//const URL = 'https://magnificent-newt-housecoat.cyclic.app';
+const URL = 'http://localhost:8080'
 export const authenticateSignup = async(data) => {
 
     try {
@@ -16,10 +17,10 @@ export const authenticateSignup = async(data) => {
 export const authenticateLogin = async(data) => {
 
     try {
-       return await axios.post(`/login`, data)
+       return await axios.post(`${URL}/login`, data)
     } catch (error) {
         console.log("Error while Logging in",error);
-        return error.response;
+        //return error.response;
     }
 
 }    
@@ -29,7 +30,8 @@ export const authenticateLogin = async(data) => {
 export const addCart = async(data) => {
 
     try {
-       return await axios.post(`/addToCart`, data)
+       let id =  data.id;
+       return await axios.post(`/addToCart/${id}`, data)
     } catch (error) {
         console.log("Error while adding to cart",error);
         return error.response;

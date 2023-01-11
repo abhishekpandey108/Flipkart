@@ -1,9 +1,9 @@
-//import {useState} from 'react';
+import {useState} from 'react';
 import {Box,Button,styled} from '@mui/material';
 import { ShoppingCart , FlashOn } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-//import { useDispatch } from 'react-redux';
-//import { addToCart } from '../../redux/actions/cartAction';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/actions/cartAction';
 import { addCart } from '../../service/api';
 
 const Left = styled(Box)(({ theme }) => ({
@@ -43,46 +43,33 @@ const Buttons = styled(Button)(({ theme })=>({
 
 const LeftSide = ({product}) => {
 
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  //const {id} = product;
-  //const quantity=1; 
+  const {id} = product;
+  const [quantity, setQuantity] = useState(1); 
 
-  const addTooCart = async() =>{
-    let user = JSON.parse(localStorage.getItem('User_Id')) || "" ;
-    let product_id = JSON.parse(localStorage.getItem('product_id')) || "" ;
-    let pro = {};
-    if(user===""){
-      navigate('/');
-    }
-   
-    else if(user!=="" && product_id!==""){
-      
-      pro.user_Id =user;
-      pro.product_id = product_id;
-      pro.url = product.url;
-      pro.title = product.title.longTitle;
-      pro.cost = product.price.cost;
-      pro.mrp =product.price.mrp;
-    }
-
-    console.log(pro);
-    let added = await addCart(pro);
-    console.log(added);
-    // dispatch(addToCart(id, quantity));
-    // localStorage.setItem('product_id', JSON.stringify(id))
+  // const addTooCart = () => {
+  //   dispatch(addToCart(id, quantity));
+  //   navigate('/cart');
+  // }
+ 
+  const addTooCart = (id) =>{
+    let data ={};
+    data.id = id;
+    data.url = product.url;
+    data.price = product.cost.price;
+    addCart(product);
     navigate('/cart');
   }
- 
 
-
+console.log(product.id);
 
   return (
     <Left>
       <Box style={{ padding: '15px 20px',border: '1px solid #f0f0f0' }}  >
         <Image src={product.detailUrl} alt="product" /><br />
       </Box>
-      <Buttons style = {{marginRight: 10, background: '#ff9f00'}}  variant="contained" onClick={addTooCart} ><ShoppingCart />Add to Cart</Buttons>
+      <Buttons style = {{marginRight: 10, background: '#ff9f00'}}  variant="contained" onClick={()=>addTooCart(product.id)} ><ShoppingCart />Add to Cart</Buttons>
       <Buttons style = {{background: '#fb641b'}} variant="contained" ><FlashOn /> Buy Now</Buttons>
     </Left>
 )

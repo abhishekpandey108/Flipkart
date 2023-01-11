@@ -9,24 +9,28 @@ console.log("line 6 in user controller")
         let {firstname,lastname,email,password,number} = user;
         console.log(number," ",email," ",firstname," ",lastname," ");
         let alreadyexist = await User.findOne({number: number});
-        console.log(alreadyexist)
-        if(alreadyexist){
-            return res.status(400).send({
-                error : 'user is already registered'
-            })
-        }else{
-            // password = bcrypt.hashSync(password);
-            // console.log(password)
-            // user.password = password
-            const newUser = new User(user);
+        console.log("Line:12",alreadyexist)
+        // if(alreadyexist){
+        //     return res.status(400).send({
+        //         error : 'User is already registered'
+        //     })
+        // }
 
-            await newUser.save();
-
+            password = bcrypt.hashSync(password);
+            console.log(password)
+            user.password = password
+            // await User.insertOne(user);
+            // const newUser = new User(user);
+            // console.log("line 22 ",newUser)
+            // let bool=await newUser.save();
+            // console.log("line 24 ",bool) ---> gonna give null
+            let a = await User.create(user);
+            console.log("a: ", a)
             return res.status(201).send({
                 message : 'successfully registered',
                 user : user
             })
-        }
+        
     } catch (error) {
         return res.status(500).send({
             message : "Signup Error 500"
@@ -48,8 +52,10 @@ export const userLogin = async(req,res) => {
         let pass = req.body.password;
         console.log('name: ',name ,'pass: ',pass);
         let user = await User.findOne({ firstname: name});
+        console.log("User :", user);
         let hash = user.password;
-        var bool = await bcrypt.compare(pass, hash)
+        let bool = await bcrypt.compare(pass, hash)
+        console.log("bool: ",bool);
         
         if(user && bool){ 
             // let token = jwt.sign({
@@ -58,16 +64,13 @@ export const userLogin = async(req,res) => {
             // }, JWT_SECRET)
                             
             
-            const token = await user.generateToken();
+           const token = await user.generateToken();
             console.log("token: ",token);
             res.cookie("jwt", 'token',{
                 expires : new Date(Date.now() + 25892000),
                 httpOnly : true
             })
-            res.cookie("jwt", token,{
-                expires : new Date(Date.now() + 25892000),
-                httpOnly : true
-            }); 
+           
             
             return res.status(200).json({ data : user,token : token });
         }

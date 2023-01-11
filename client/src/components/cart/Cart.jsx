@@ -53,7 +53,7 @@ const StyledButton = styled(Button)`
 const Cart = () => {
 
     const {cartItems} = useSelector( state => state.cart );
-
+    console.log("line 56: ",cartItems )
     const { id } = useParams();
 
     const dispatch = useDispatch();
