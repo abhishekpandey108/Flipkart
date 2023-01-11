@@ -66,7 +66,7 @@ const Cart = () => {
         })();
        
         
-    }, [cartItems]);
+    }, [cartItems.length]);
     console.log("cartItem legth: line 70",cartItems.length)
     console.log("line 71: ",cartItems)
 

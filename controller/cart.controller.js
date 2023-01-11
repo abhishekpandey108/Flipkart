@@ -5,10 +5,10 @@ export const getCart = async (req, res) => {
   try {
     const { id } = req.params;
     const products = await Cart.find({"user_id":id})
-      res.status(200).json(products);
+      return res.status(200).json(products);
       
   } catch (error) {
-    res.status(500).json({ message: "internal Server Error" })
+    return res.status(500).json({ message: "internal Server Error" })
   }
 };
 

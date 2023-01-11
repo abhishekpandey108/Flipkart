@@ -42,8 +42,8 @@ const Total = ({cartItems}) => {
     const totalAmount = () =>{
         let price = 0 , discount = 0;
         cartItems.map(el=>{
-           price += (el.price.mrp * el.quantity);
-           discount += ((el.price.mrp * el.quantity) - (el.price.cost * el.quantity) );
+           price += (el.mrp * el.quantity);
+           discount += ((el.mrp * el.quantity) - (el.cost * el.quantity) );
            })
 
            setPrice(price);
