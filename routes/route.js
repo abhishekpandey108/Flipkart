@@ -15,7 +15,7 @@ router.get('/products', getProducts);
 router.get('/product/:id', getProductById);
 
 router.post('/addToCart/:id', addToCart);
-
+//router.post('/addToCart', addToCart);
 
 
 export default router;

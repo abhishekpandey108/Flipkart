@@ -26,11 +26,17 @@ export const getOneItem = async (req, res) => {
     res.send("error");
   }
 };
+
+
 export const addToCart = async (req, res) => {
   try {
     let c = req.body;
+    console.log(c);
+    // let obj = await Cart.create(c);
+    // console.log(obj);
     const newCart = new Cart(c);
     const data = await newCart.save();
+    console.log("Cart saved : ", data);
     // const carts = new Cart(req.body);
     // const data = await carts.save();
     
@@ -40,10 +46,13 @@ export const addToCart = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).send({
-      message: error,
+      message: "Something went wrong",
+      error: error.message,
     });
   }
 };
+
+
 
 export const incCart = async (req, res) => {
   try {

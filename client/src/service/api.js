@@ -31,7 +31,7 @@ export const addCart = async(data) => {
 
     try {
        let id =  data.id;
-       return await axios.post(`/addToCart/${id}`, data)
+       return await axios.post(`${URL}/addToCart/${id}`, data)
     } catch (error) {
         console.log("Error while adding to cart",error);
         return error.response;
