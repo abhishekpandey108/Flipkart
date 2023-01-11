@@ -1,9 +1,9 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import {Box, Grid,Typography, Button,  styled} from '@mui/material';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { addToCart } from '../../redux/actions/cartAction';
-import {useParams} from 'react-router-dom'
+// import { useSelector, useDispatch } from 'react-redux';
+// import { addToCart } from '../../redux/actions/cartAction';
+import { getCart } from '../../service/api';
 import Total from './Total';
 import CartItem from './CartItem';
 import CartEmpty from './CartEmpty';
@@ -52,18 +52,23 @@ const StyledButton = styled(Button)`
 
 const Cart = () => {
 
-    const {cartItems} = useSelector( state => state.cart );
-    console.log("line 56: ",cartItems )
-    const { id } = useParams();
-
-    const dispatch = useDispatch();
+   
+    const [cartItems,setCartItems] = useState([])
     
     useEffect(() => {
-        if(cartItems && id !== cartItems.id)   
-            dispatch(addToCart(id));
-    }, [dispatch, cartItems, id]);
-
-    
+        
+        let userId = JSON.parse(localStorage.getItem('User_Id'));
+        (async ()=> {
+            console.log("Cart.jsx: 68");
+            let data = await getCart(userId);
+            console.log("data",data.data);
+            setCartItems([...data.data]);
+        })();
+       
+        
+    }, [cartItems]);
+    console.log("cartItem legth: line 70",cartItems.length)
+    console.log("line 71: ",cartItems)
 
   return (
     <>

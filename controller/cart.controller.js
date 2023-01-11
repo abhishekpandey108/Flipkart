@@ -3,8 +3,8 @@ import Cart from '../model/cart.schema.js';
 export const getCart = async (req, res) => {
   
   try {
-    const { user_Id } = req.params;
-    const products = await Cart.find({user_Id})
+    const { id } = req.params;
+    const products = await Cart.find({"user_id":id})
       res.status(200).json(products);
       
   } catch (error) {
@@ -51,6 +51,10 @@ export const addToCart = async (req, res) => {
     });
   }
 };
+
+
+
+
 
 
 

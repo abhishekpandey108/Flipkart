@@ -40,4 +40,16 @@ export const addCart = async(data) => {
 }    
 
 
+export const getCart = async(id) => {
+
+    try {
+      console.log("api 46 : ", id)
+       return await axios.get(`${URL}/getCart/${id}`)
+    } catch (error) {
+        console.log("Error while getting cart items",error);
+        return error.response;
+    }
+
+}    
+
 

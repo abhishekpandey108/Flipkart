@@ -62,14 +62,14 @@ const CartItem = ({ item }) => {
             </LeftComponent>
 
             <Box style={{ margin: 20 }}>
-                <Typography>{addEllipsis(item.title.longTitle)}</Typography>
+                <Typography>{addEllipsis(item.title)}</Typography>
                 <SmallText>Seller:RetailNet
                     <span><img src={fassured} style={{ width: 50, marginLeft: 10 }} alt='fassure' /></span>
                 </SmallText>
                 <Typography style={{margin: '20px 0'}}>
-                    <Cost component="span">₹{item.price.cost * item.quantity}</Cost>&nbsp;&nbsp;&nbsp;
-                    <MRP component="span"><strike>₹{item.price.mrp * item.quantity}</strike></MRP>&nbsp;&nbsp;&nbsp;
-                    <Discount component="span">{item.price.discount} off</Discount>
+                    <Cost component="span">₹{item.cost * item.quantity}</Cost>&nbsp;&nbsp;&nbsp;
+                    <MRP component="span"><strike>₹{item.mrp * item.quantity}</strike></MRP>&nbsp;&nbsp;&nbsp;
+                    <Discount component="span">{item.discount} off</Discount>
                 </Typography>
                 <Remove variant="outlined" onClick={()=>removeToCart(item.id)}>Remove</Remove>
             </Box>
