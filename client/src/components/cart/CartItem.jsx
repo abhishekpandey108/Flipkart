@@ -1,8 +1,11 @@
+import { useContext } from 'react';
 import { Card, Box, Typography, Button, styled } from '@mui/material';
 import { addEllipsis } from '../../constants/elipsis';
 import GroupButton from './GroupButton';
-import { removeFromCart } from '../../redux/actions/cartAction';
-import { useDispatch } from 'react-redux';
+import { removeFromCart } from '../../service/api';
+import { PageContext } from '../../context/DataProvider';
+//import { removeFromCart } from '../../redux/actions/cartAction';
+//import { useDispatch } from 'react-redux';
 
 const Component = styled(Card)`
     border-top: 1px solid #f0f0f0;
@@ -45,10 +48,11 @@ const Remove = styled(Button)`
 const CartItem = ({ item }) => {
     const fassured = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png';
 
-    const dispatch = useDispatch();
+    let {page,handlePage} = useContext(PageContext);
 
-    const removeToCart = (id) => {
-        dispatch(removeFromCart(id));
+    const removeToCart = (data) => {
+        removeFromCart(data);
+        handlePage(page);
     }
 
 
@@ -71,7 +75,7 @@ const CartItem = ({ item }) => {
                     <MRP component="span"><strike>₹{item.mrp * item.quantity}</strike></MRP>&nbsp;&nbsp;&nbsp;
                     <Discount component="span">{item.discount} off</Discount>
                 </Typography>
-                <Remove variant="outlined" onClick={()=>removeToCart(item.id)}>Remove</Remove>
+                <Remove variant="outlined" onClick={()=>removeToCart(item)}>Remove</Remove>
             </Box>
         </Component>
     )

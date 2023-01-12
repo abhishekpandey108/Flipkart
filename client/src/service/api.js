@@ -78,3 +78,17 @@ export const decCart = async(data) => {
     }
 
 }    
+
+
+
+export const removeFromCart = async(data) => {
+
+    try {
+      console.log("api 87 : ", data);
+       return await axios.post(`${URL}/removeFromCart`,data);
+    } catch (error) {
+        console.log("Error while removing cart item ",error);
+        return error.response;
+    }
+
+}   

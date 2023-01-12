@@ -1,5 +1,6 @@
 import {Button,ButtonGroup,styled} from '@mui/material';
-//import { useState } from 'react';
+import { useContext } from 'react';
+import { PageContext } from '../../context/DataProvider';
 //import { removeFromCart } from '../../redux/actions/cartAction';
 //import { useDispatch } from 'react-redux';
 //import { addToCart } from '../../redux/actions/cartAction';
@@ -15,13 +16,17 @@ const RoundButton = styled(Button)`
 
 const GroupButton = ({item}) =>{
 
+    let {page,handlePage} = useContext(PageContext);
+
     const minus = () => {
        decCart(item);
+       handlePage(page);
     }    
 
     
     const addTooCart = () =>{
         incCart(item);
+        handlePage(page);
       }
       
     return(

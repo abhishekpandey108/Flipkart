@@ -7,7 +7,7 @@ import { getCart } from '../../service/api';
 import Total from './Total';
 import CartItem from './CartItem';
 import CartEmpty from './CartEmpty';
-import { CartContext } from '../../context/DataProvider';
+import { CartContext, PageContext } from '../../context/DataProvider';
 
 const Component = styled(Grid)(({ theme }) => ({
     padding: '30px 120px',
@@ -53,8 +53,8 @@ const StyledButton = styled(Button)`
 
 const Cart = () => {
 
-    let {handleCartLen} = useContext(CartContext);
-
+    let {cartLength ,handleCartLen} = useContext(CartContext);
+    let {page} = useContext(PageContext);
     const [cartItems,setCartItems] = useState([]);
     
     useEffect(() => {
@@ -68,11 +68,11 @@ const Cart = () => {
         })();
        
         
-    }, [cartItems.length]);
+    }, [cartLength,page]);
     handleCartLen(cartItems.length);
     console.log("cartItem legth: line 73",cartItems.length)
     console.log("line 74: ",cartItems);
-    let {cartLength} = useContext(CartContext)
+   
     console.log("Cart.jsx line 76 :",cartLength);
 
   return (

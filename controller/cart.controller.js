@@ -148,8 +148,8 @@ export const decCart = async (req, res) => {
 export const delCart = async (req, res) => {
 
   try {
-    const id = req.params.id;
-    const cart = await Cart.findByIdAndDelete({ _id: id },{new:true});
+    let {user_id,product_id} = req.body;
+    const cart = await Cart.findOneAndDelete({"user_id" : user_id,"product_id" : product_id});
       if (cart) {
         return res.status(201).send({
             message: "successfully deleted",
