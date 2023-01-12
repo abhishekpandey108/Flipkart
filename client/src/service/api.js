@@ -53,3 +53,28 @@ export const getCart = async(id) => {
 }    
 
 
+export const incCart = async(data) => {
+
+    try {
+      console.log("api 59 : ", data);
+       return await axios.post(`${URL}/incCart`,data);
+    } catch (error) {
+        console.log("Error while increasing cart item ",error);
+        return error.response;
+    }
+
+}    
+
+
+
+export const decCart = async(data) => {
+
+    try {
+      console.log("api 73 : ", data);
+       return await axios.post(`${URL}/decCart`,data);
+    } catch (error) {
+        console.log("Error while decreasing cart item ",error);
+        return error.response;
+    }
+
+}    

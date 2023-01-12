@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { DataContext } from '../../context/DataProvider';
+import { CartContext, DataContext } from '../../context/DataProvider';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {Link} from 'react-router-dom';
 import {Box,Button,Typography,Badge,styled} from '@mui/material';
@@ -80,9 +80,10 @@ const CustomButton = () =>{
     }    
 
     const {accountName,setAccountName} = useContext(DataContext);
+     
+    const {cartLength} = useContext(CartContext);
 
-
-    const {cartItems} = useSelector(state => state.cart);
+   // const {cartItems} = useSelector(state => state.cart);
 
 
     return(
@@ -96,7 +97,7 @@ const CustomButton = () =>{
             <Typography>More</Typography>
             
             <CartContainer to='/cart'>
-                <Badge badgeContent={cartItems?.length} color='warning' >
+                <Badge badgeContent={cartLength} color='warning' >
                 <ShoppingCartIcon style={{fontSize:'20px'}}/>
                   </Badge>
                 <Typography style={{fontSize:'14px',marginLeft:'5px'}}>Cart</Typography>

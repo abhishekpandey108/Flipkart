@@ -60,19 +60,23 @@ export const addToCart = async (req, res) => {
 
 export const incCart = async (req, res) => {
   try {
-    let id = req.params.id;
-      let cart = await Cart.findById(id);
+    let {user_id,product_id} = req.body;
+      let cart = await Cart.findOne({"user_id" : user_id,"product_id" : product_id});
+      console.log("Cart Controller Line 65 : ",cart);
       if (cart) {
-          let { item_quantity } = cart;
-          const newQuantity = item_quantity + 1;
+          let { quantity } = cart;
+          console.log("Cart Controller Line 68 :", quantity)
+          const newQuantity = quantity + 1;
       
-         const newData= await Cart.findByIdAndUpdate(
-            req.params.id,
+         const newData = await Cart.findOneAndUpdate(
+          {"user_id" : user_id, "product_id" : product_id},
             {
-              $set: { item_quantity: newQuantity },
+              $set: { quantity: newQuantity },
             },
             { new: true }
           );
+
+          console.log("Line 79 : ",newData)
       
           return res.status(201).send({
             message: "successfully incremented",
@@ -96,32 +100,33 @@ export const incCart = async (req, res) => {
 
 export const decCart = async (req, res) => {
   try {
-    const id = req.params.id;
-      const cart = await Cart.findById({ _id: id });
+      let {user_id,product_id} = req.body;
+      let cart = await Cart.findOne({"user_id" : user_id,"product_id" : product_id});
+      console.log("Cart Controller Line 105 : ",cart);
+    
       if (cart) {
-        let { item_quantity } = cart;
-        const newQuantity = item_quantity - 1;
-        console.log(newQuantity)
-        var updatedData = null;
-        if (newQuantity <= 0) {
-          updatedData = await Cart.findByIdAndDelete({ _id: id },{new:true});
-        }
+        let { quantity } = cart;
+        const newQuantity = quantity - 1;
+        console.log("Cart Controller Line 110 :",newQuantity)
+       if(newQuantity==0){
+        await Cart.findOneAndDelete({"user_id" : user_id,"product_id" : product_id});
+       }
+        
         else {
-          updatedData = await Cart.findByIdAndUpdate(
-              { _id: id },
+          const newData = await Cart.findOneAndUpdate(
+            {"user_id" : user_id, "product_id" : product_id},
               {
-                $set: {
-                  item_quantity: item_quantity - 1,
-                },
-                }, {
-                  new:true
-              }
+                $set: { quantity: newQuantity },
+              },
+              { new: true }
             );
+
+            console.log("Cart Controller Line 124 : ",newData);
         }
       
   
       return res.status(201).send({
-        message: "successfully decremented",
+        message: "Successfully decremented",
         carts: updatedData,
       });
       }

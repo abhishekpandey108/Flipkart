@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useState,useContext} from 'react';
 import {Box, Grid,Typography, Button,  styled} from '@mui/material';
 
 // import { useSelector, useDispatch } from 'react-redux';
@@ -7,6 +7,7 @@ import { getCart } from '../../service/api';
 import Total from './Total';
 import CartItem from './CartItem';
 import CartEmpty from './CartEmpty';
+import { CartContext } from '../../context/DataProvider';
 
 const Component = styled(Grid)(({ theme }) => ({
     padding: '30px 120px',
@@ -52,8 +53,9 @@ const StyledButton = styled(Button)`
 
 const Cart = () => {
 
-   
-    const [cartItems,setCartItems] = useState([])
+    let {handleCartLen} = useContext(CartContext);
+
+    const [cartItems,setCartItems] = useState([]);
     
     useEffect(() => {
         
@@ -67,8 +69,11 @@ const Cart = () => {
        
         
     }, [cartItems.length]);
-    console.log("cartItem legth: line 70",cartItems.length)
-    console.log("line 71: ",cartItems)
+    handleCartLen(cartItems.length);
+    console.log("cartItem legth: line 73",cartItems.length)
+    console.log("line 74: ",cartItems);
+    let {cartLength} = useContext(CartContext)
+    console.log("Cart.jsx line 76 :",cartLength);
 
   return (
     <>
